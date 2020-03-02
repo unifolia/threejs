@@ -57,6 +57,7 @@ three.createProjects = () => {
     let marsTexture = textureLoader.load("./assets/marsometer.png")
     let pathsTexture = textureLoader.load("./assets/pathsAndPodcasts.png")
     let couchTexture = textureLoader.load("./assets/jamesCouch.png")
+    let skillsTexture = textureLoader.load("./assets/skills.png")
 
     // 
     pacRem = new THREE.Mesh(
@@ -117,6 +118,17 @@ three.createProjects = () => {
     jamesCouch.position.set(0, 2, -10)
     jamesCouch.receiveShadow = false
     jamesCouch.castShadow = false
+
+    skills = new THREE.Mesh(
+        new THREE.BoxGeometry(10, 10, 10),
+        new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            map: skillsTexture,
+        })
+    )
+    skills.position.set(0, 12, 15)
+    skills.receiveShadow = false
+    skills.castShadow = false
 }
 
 three.createShapes = () => {
@@ -168,6 +180,7 @@ three.animate = () => {
     cashComrade.rotation.z += 0.002
     paths.rotation.z -= 0.002
     paths.rotation.y += 0.002
+    skills.rotation.y += 0.002
 
     three.resizeScreen()
     renderer.render(scene, camera)
@@ -217,7 +230,7 @@ let init = () => {
     three.createBackground()
     three.createShapes()
 
-    scene.add(james, pacRem, marsometer, cashComrade, paths, jamesCouch, floor, ambientLight, light)
+    scene.add(james, pacRem, marsometer, cashComrade, paths, jamesCouch, skills, floor, ambientLight, light)
 
     three.animate()
     three.keyDown()
