@@ -11,6 +11,9 @@ let camera = new THREE.PerspectiveCamera(90, 1280 / 720, 0.1, 1000)
 let textureLoader = new THREE.TextureLoader()
 let isKeyDown = false
 
+let initialX = null
+let initialY = null
+
 three.createBackground = () => {
     // Create floor
     floor = new THREE.Mesh(
@@ -143,7 +146,7 @@ three.createCanvas = () => {
     const canvas = document.querySelector('#canvas')
     renderer = new THREE.WebGLRenderer({ canvas })
 
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.enabled = true
     renderer.shadowMap.type = THREE.BasicShadowMap
 
     document.body.appendChild(renderer.domElement)
@@ -204,8 +207,8 @@ three.keyDown = () => {
                 position.z += -Math.cos(rotation.y + Math.PI / 2) * speed
             } else if (event.keyCode == 83) {
                 // "S" - move backward
-                position.x += Math.sin(rotation.y) * speed;
-                position.z += -Math.cos(rotation.y) * speed;
+                position.x += Math.sin(rotation.y) * speed
+                position.z += -Math.cos(rotation.y) * speed
             } else if (event.keyCode == 68) {
                 // "D" - move right
                 position.x += Math.sin(rotation.y - Math.PI / 2) * speed
@@ -225,6 +228,48 @@ three.keyUp = () => {
     isKeyDown = false
 }
 
+three.swipe = () => {
+    document.addEventListener("touchstart", startTouch, false)
+    document.addEventListener("touchmove", moveTouch, false)
+
+    function startTouch(event) {
+        initialX = event.touches[0].clientX
+        initialY = event.touches[0].clientY
+    }
+
+    function moveTouch(event) {
+        if (initialX !== null || initialY !== null) {
+            let currentX = event.touches[0].clientX
+            let currentY = event.touches[0].clientY
+
+            let diffX = initialX - currentX
+            let diffY = initialY - currentY
+
+            let { position, rotation } = camera
+            let { speed, turnSpeed } = player
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
+                    rotation.y += (turnSpeed * 4)
+                } else {
+                    rotation.y -= (turnSpeed * 4)
+                }
+            } else {
+                if (diffY > 0) {
+                    position.x -= Math.sin(rotation.y) * speed * 4
+                    position.z -= -Math.cos(rotation.y) * speed * 4
+                } else {
+                    position.x += Math.sin(rotation.y) * speed * 4
+                    position.z += -Math.cos(rotation.y) * speed * 4
+                }
+            }
+            initialX = null
+            initialY = null
+        }
+    }
+}
+
+
 let init = () => {
     three.createCanvas()
     three.createBackground()
@@ -234,6 +279,7 @@ let init = () => {
 
     three.animate()
     three.keyDown()
+    three.swipe()
 }
 
 window.onload = init
