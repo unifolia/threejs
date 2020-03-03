@@ -242,11 +242,11 @@ three.swipe = () => {
                 }
             } else {
                 if (diffY > 0) {
-                    position.x -= Math.sin(rotation.y) * speed * 4
-                    position.z -= -Math.cos(rotation.y) * speed * 4
-                } else {
                     position.x += Math.sin(rotation.y) * speed * 4
                     position.z += -Math.cos(rotation.y) * speed * 4
+                } else {
+                    position.x -= Math.sin(rotation.y) * speed * 4
+                    position.z -= -Math.cos(rotation.y) * speed * 4
                 }
             }
             initialX = null
