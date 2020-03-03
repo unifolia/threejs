@@ -22,6 +22,7 @@ three.createBackground = () => {
             color: 0xc4bcd0, 
             wireframe: false})
     )
+    floor.position.set(0, 0, 2)
     floor.rotation.x -= Math.PI / 2
 
     // Create ambient light
@@ -48,10 +49,7 @@ three.createJames = () => {
             map: texture,
         })
     )
-
-    james.position.set(-3, 5, 5)
-    james.receiveShadow = false
-    james.castShadow = true
+    james.position.set(-3, 5, 7)
 }
 
 three.createProjects = () => {
@@ -70,9 +68,7 @@ three.createProjects = () => {
             map: pacTexture,
         })
     )
-    pacRem.position.set(4, 5, 5)
-    pacRem.receiveShadow = false
-    pacRem.castShadow = false
+    pacRem.position.set(4, 5, 7)
 
     // 
     cashComrade = new THREE.Mesh(
@@ -82,9 +78,7 @@ three.createProjects = () => {
             map: cashTexture,
         })
     )
-    cashComrade.position.set(7, 5, 0)
-    cashComrade.receiveShadow = false
-    cashComrade.castShadow = false
+    cashComrade.position.set(7, 5, 2)
 
     // 
     marsometer = new THREE.Mesh(
@@ -94,9 +88,7 @@ three.createProjects = () => {
             map: marsTexture,
         })
     )
-    marsometer.position.set(-8, 5, 0)
-    marsometer.receiveShadow = false
-    marsometer.castShadow = false
+    marsometer.position.set(-8, 5, 2)
 
     // 
     paths = new THREE.Mesh(
@@ -106,9 +98,7 @@ three.createProjects = () => {
             map: pathsTexture,
         })
     )
-    paths.position.set(10, 3, 5)
-    paths.receiveShadow = false
-    paths.castShadow = false
+    paths.position.set(10, 3, 7)
 
     // 
     jamesCouch = new THREE.Mesh(
@@ -118,9 +108,7 @@ three.createProjects = () => {
             map: couchTexture,
         })
     )
-    jamesCouch.position.set(0, 2, -10)
-    jamesCouch.receiveShadow = false
-    jamesCouch.castShadow = false
+    jamesCouch.position.set(0, 2, -8)
 
     skills = new THREE.Mesh(
         new THREE.BoxGeometry(10, 10, 10),
@@ -129,9 +117,7 @@ three.createProjects = () => {
             map: skillsTexture,
         })
     )
-    skills.position.set(0, 12, 15)
-    skills.receiveShadow = false
-    skills.castShadow = false
+    skills.position.set(0, 12, 17)
 }
 
 three.createShapes = () => {
